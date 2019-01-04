@@ -1,3 +1,9 @@
+@rem Configure step
+if "%ARCH%"=="32" (
+    set CMAKE_GENERATOR=Visual Studio 15 2017
+) else (
+    set CMAKE_GENERATOR=Visual Studio 15 2017 Win64
+)
 
 @rem Let CMake know about the LLVM install path, for find_package()
 set CMAKE_PREFIX_PATH=%LIBRARY_PREFIX%
