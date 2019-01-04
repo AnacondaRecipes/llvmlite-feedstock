@@ -1,5 +1,5 @@
 {% set name = "llvmlite" %}
-{% set version = "0.26.0" %}
+{% set version = "0.27.0" %}
 {% set build_number = "0" %}
 
 package:
@@ -24,15 +24,15 @@ requirements:
     - {{ compiler('cxx') }}  # [not (osx or armv6l or armv7l or aarch64)]
     # The DLL build uses cmake on Windows
     - cmake          # [win]
-    - make           # [unix]
+    - make           # [unix and not (armv6l or armv7l or aarch64)]
   host:
     - python
     # On channel https://anaconda.org/numba/
-    - llvmdev 6.0*
+    - llvmdev 7.0*
     - vs2015_runtime # [win]
     - enum34         # [py27]
     # llvmdev is built with libz compression support
-    - zlib           # [unix]
+    - zlib           # [unix and not (armv6l or armv7l or aarch64)]
   run:
     - python
     - enum34         # [py27]
