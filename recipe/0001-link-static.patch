@@ -1,0 +1,25 @@
+From ee91ce2d413b11e890d553d97fb3910935f64318 Mon Sep 17 00:00:00 2001
+From: Angela Gloyna <angela.gloyna@gmail.com>
+Date: Wed, 24 Jun 2020 19:27:28 -0500
+Subject: [PATCH] link static
+
+---
+ ffi/build.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ffi/build.py b/ffi/build.py
+index 583df98..ed9bb3a 100755
+--- a/ffi/build.py
++++ b/ffi/build.py
+@@ -143,7 +143,7 @@ def main_posix(kind, library_ext):
+             raise RuntimeError(msg)
+ 
+     # Get LLVM information for building
+-    libs = run_llvm_config(llvm_config, "--system-libs --libs all".split())
++    libs = run_llvm_config(llvm_config, "--system-libs --link-static --libs all".split())
+     # Normalize whitespace (trim newlines)
+     os.environ['LLVM_LIBS'] = ' '.join(libs.split())
+ 
+-- 
+2.17.2 (Apple Git-113)
+
