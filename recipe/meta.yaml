@@ -23,8 +23,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    # The DLL build uses cmake on Windows
-    - cmake                  # [win]
+    - cmake
     - make                   # [unix]
   host:
     - python
