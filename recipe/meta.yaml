@@ -14,7 +14,7 @@ source:
     - 0001-Add-add_dll_directory-for-LIBRARY_BIN-for-Py38-on-Windows.patch  # [win and py>=38]
 
 build:
-  number: 0
+  number: 2
   skip: True  # [py<37]
   script_env:
     - PY_VCRUNTIME_REDIST
@@ -31,8 +31,8 @@ requirements:
     - python
     - setuptools
     - pip
-    - llvmdev 11.1.*
-    - llvm 11.1.*
+    - llvmdev 11.0.*
+    - llvm 11.0.*
     - vs2015_runtime  # [win]
     - zlib  # [win]
   run:
