@@ -15,7 +15,8 @@ source:
 
 build:
   number: 2
-  skip: True  # [py<37]
+  # RuntimeError: Cannot install on Python version 3.10.0; only versions >=3.7,<3.10 are supported.
+  skip: True  # [py<37 or py==310]
   script_env:
     - PY_VCRUNTIME_REDIST
 
