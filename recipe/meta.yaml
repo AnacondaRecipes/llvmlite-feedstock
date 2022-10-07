@@ -1,6 +1,6 @@
 {% set name = "llvmlite" %}
-{% set version = "0.38.0" %}
-{% set sha256 = "a99d166ccf3b116f3b9ed23b9b70ba2415640a9c978f3aaa13fad49c58f4965c" %}
+{% set version = "0.39.1" %}
+{% set sha256 = "b43abd7c82e805261c425d50335be9a6c4f84264e34d6d6e475207300005d572" %}
 
 package:
   name: {{ name|lower }}
@@ -10,8 +10,6 @@ source:
   # don't use github generated tar-ball as the sha256 value may not be stable
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    - 0001-Add-add_dll_directory-for-LIBRARY_BIN-for-Py38-on-Windows.patch  # [win and py>=38]
 
 build:
   number: 0
@@ -26,8 +24,6 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - make                   # [unix]
-    - patch     # [not win]
-    - m2-patch  # [win]
   host:
     - python
     - setuptools
@@ -53,11 +49,12 @@ test:
     - python -m llvmlite.tests || true  # [osx]
 
 about:
-  home: http://llvmlite.pydata.org
+  home: https://llvmlite.pydata.org
   license: BSD-2-Clause
   license_file: LICENSE
+  license_family: BSD
   summary: A lightweight LLVM python binding for writing JIT compilers.
-  doc_url: http://llvmlite.pydata.org/
+  doc_url: https://llvmlite.pydata.org/en/latest/
   dev_url: https://github.com/numba/llvmlite
 
 extra:
