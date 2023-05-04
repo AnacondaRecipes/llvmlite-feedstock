@@ -30,8 +30,8 @@ requirements:
     - wheel
     - llvmdev 11.1.*
     - llvm 11.1.*
-    - zlib 1.2
-    - vs2015_runtime 14.0.25420 # [win]
+    - zlib 1.2.*
+    - vs2015_runtime 14.15.26706 # [win]
   run:
     - python
     - zlib
