@@ -12,7 +12,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<37 or s390x]
+  skip: true  # [py<38 or s390x]
   script_env:
     - PY_VCRUNTIME_REDIST
   ignore_run_exports:
@@ -28,10 +28,10 @@ requirements:
     - setuptools
     - pip
     - wheel
-    - llvmdev 11.1.*
-    - llvm 11.1.*
+    - llvmdev 14.*
+    - llvm 14.*
     - zlib 1.2.*
-    - vs2015_runtime 14.16.27012 # [win]
+    - vs2015_runtime 14.27.29016 # [win]
   run:
     - python
     - zlib
@@ -43,12 +43,14 @@ test:
   imports:
     - llvmlite
     - llvmlite.binding
+    - llvmlite.ir
+    - llvmlite.tests
   commands:
     - pip check
     - export LLVMLITE_DIST_TEST=''  # [unix]
     - set LLVMLITE_DIST_TEST=""     # [win]
-    - python -m llvmlite.tests  # [not osx]
-    - python -m llvmlite.tests || true  # [osx]
+    - python -m llvmlite.tests
+
     
 
 about:
