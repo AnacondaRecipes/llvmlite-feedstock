@@ -31,7 +31,7 @@ requirements:
     - llvmdev 11.1.*
     - llvm 11.1.*
     - zlib 1.2.*
-    - vs2015_runtime 14.15.26706 # [win]
+    - vs2015_runtime 14.16.27012 # [win]
   run:
     - python
     - zlib
