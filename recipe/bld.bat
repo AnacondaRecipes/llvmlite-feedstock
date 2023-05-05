@@ -17,7 +17,7 @@ if exist ffi\build rmdir /S /Q ffi\build
 
 llvm-config.exe --libs
 
-%PYTHON% -S setup.py install
+%PYTHON% -m pip install . --no-deps  --no-build-isolation --ignore-installed -vvv
 if errorlevel 1 exit 1
 
 %PYTHON% runtests.py

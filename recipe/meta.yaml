@@ -1,6 +1,5 @@
 {% set name = "llvmlite" %}
-{% set version = "0.39.1" %}
-{% set sha256 = "b43abd7c82e805261c425d50335be9a6c4f84264e34d6d6e475207300005d572" %}
+{% set version = "0.40.0" %}
 
 package:
   name: {{ name|lower }}
@@ -9,11 +8,11 @@ package:
 source:
   # don't use github generated tar-ball as the sha256 value may not be stable
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: c910b8fbfd67b8e9d0b10ebc012b23cd67cbecef1b96f00d391ddd298d71671c
 
 build:
   number: 0
-  skip: true  # [py<37 or s390x]
+  skip: true  # [py<38 or s390x]
   script_env:
     - PY_VCRUNTIME_REDIST
   ignore_run_exports:
@@ -29,31 +28,36 @@ requirements:
     - setuptools
     - pip
     - wheel
-    - llvmdev 11.1.*
-    - llvm 11.1.*
-    - zlib
-    - vs2015_runtime  # [win]
+    - llvmdev 14.*
+    - llvm 14.*
+    - zlib 1.2.*
   run:
     - python
     - zlib
-    - vs2015_runtime  # [win]
 
 test:
+  requires:
+    - pip
   imports:
     - llvmlite
     - llvmlite.binding
+    - llvmlite.ir
+    - llvmlite.tests
   commands:
+    - pip check
     - export LLVMLITE_DIST_TEST=''  # [unix]
     - set LLVMLITE_DIST_TEST=""     # [win]
-    - python -m llvmlite.tests  # [not osx]
-    - python -m llvmlite.tests || true  # [osx]
+    - python -m llvmlite.tests
+
+    
 
 about:
-  home: https://llvmlite.pydata.org
+  home: https://llvmlite.readthedocs.io
   license: BSD-2-Clause
   license_file: LICENSE
   license_family: BSD
   summary: A lightweight LLVM python binding for writing JIT compilers.
+  description: llvmlite provides a Python binding to LLVM for use in Numba. Numba previously relied on llvmpy.
   doc_url: https://llvmlite.pydata.org/en/latest/
   dev_url: https://github.com/numba/llvmlite
 
