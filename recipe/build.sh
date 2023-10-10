@@ -2,6 +2,8 @@
 
 set -x
 
+cd ${SRC_DIR}
+
 export PYTHONNOUSERSITE=1
 
 export LLVMLITE_USE_CMAKE=1
