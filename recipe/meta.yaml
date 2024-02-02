@@ -27,8 +27,11 @@ requirements:
     - wheel
     - llvmdev 14.*
     - llvm 14.*
+    # zlib on win because our llvmdev is not built with LLVM_ENABLE_ZLIB=OFF
+    - zlib {{ zlib }} # [win]
   run:
     - python
+    - zlib # [win] through run_exports
 
 test:
   requires:
