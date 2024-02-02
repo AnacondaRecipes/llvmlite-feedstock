@@ -14,8 +14,6 @@ build:
   skip: true  # [py<39 or s390x]
   script_env:
     - PY_VCRUNTIME_REDIST
-  ignore_run_exports:
-    - zlib
 requirements:
   build:
     - {{ compiler('c') }}
@@ -29,10 +27,8 @@ requirements:
     - wheel
     - llvmdev 14.*
     - llvm 14.*
-    - zlib 1.2.*
   run:
     - python
-    - zlib
 
 test:
   requires:
@@ -57,13 +53,13 @@ about:
   license_family: BSD
   summary: A lightweight LLVM python binding for writing JIT compilers.
   description: llvmlite provides a Python binding to LLVM for use in Numba. Numba previously relied on llvmpy.
-  doc_url: https://llvmlite.pydata.org/en/latest/
+  doc_url: https://llvmlite.pydata.org
   dev_url: https://github.com/numba/llvmlite
 
 extra:
   skip-lints:
+    # llvmlite is a LLVM python binding, which is why it uses llvm directly in host
     - should_use_compilers
-    - potentially_bad_ignore_run_exports
   recipe-maintainers:
     - jakirkham
     - souravsingh
