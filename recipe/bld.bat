@@ -10,14 +10,14 @@ set ZLIB_NAME=zlib
 set ZLIB_LIBRARY_PATH=%LIBRARY_LIB%
 set ZLIB_INCLUDE=%LIBRARY_INC%
 set ZLIB_ROOT_DIR=%LIBRARY_PREFIX%
-set LLVM_ENABLE_ZLIB=ON 
- 
+set LLVM_ENABLE_ZLIB=ON
+
 @rem Ensure there are no build leftovers (CMake can complain)
 if exist ffi\build rmdir /S /Q ffi\build
 
 llvm-config.exe --libs
 
-%PYTHON% -m pip install . --no-deps  --no-build-isolation --ignore-installed -vvv
+%PYTHON% -m pip install . --no-deps  --no-build-isolation --ignore-installed -vv
 if errorlevel 1 exit 1
 
 %PYTHON% runtests.py
