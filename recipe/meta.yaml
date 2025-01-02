@@ -10,7 +10,7 @@ source:
   sha256: ae2b5b5c3ef67354824fb75517c8db5fbe93bc02cd9671f3c62271626bc041d5
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<39 or s390x]
   script_env:
     - PY_VCRUNTIME_REDIST
