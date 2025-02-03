@@ -1,5 +1,5 @@
 {% set name = "llvmlite" %}
-{% set version = "0.43.0" %}
+{% set version = "0.44.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/llvmlite-{{ version }}.tar.gz
-  sha256: ae2b5b5c3ef67354824fb75517c8db5fbe93bc02cd9671f3c62271626bc041d5
-
+  sha256: 07667d66a5d150abed9157ab6c0b9393c9356f229784a4385c02f99e94fc94d4
 build:
-  number: 1
-  skip: true  # [py<39 or s390x]
+  number: 0
+  skip: true  # [py<310 or s390x]
   script_env:
     - PY_VCRUNTIME_REDIST
 
@@ -26,8 +25,8 @@ requirements:
     - pip
     - setuptools
     - wheel
-    - llvmdev 14.*
-    - llvm 14.*
+    - llvmdev 15.*
+    - llvm 15.*
     # zlib on win because our llvmdev is not built with LLVM_ENABLE_ZLIB=OFF
     - zlib {{ zlib }} # [win]
   run:
