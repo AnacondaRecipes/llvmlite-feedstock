@@ -28,11 +28,13 @@ requirements:
     # Statically linking to llvmdev ! see comments in build.sh
     - llvmdev 15.*
     # zlib on win because our llvmdev is not built with LLVM_ENABLE_ZLIB=OFF
-    # zlib on others because we are statically linking to llvmdev
+    # zlib and zstd on others because we are statically linking to llvmdev
     - zlib {{ zlib }}
+    - zstd {{ zstd }}
   run:
     - python
     - zlib # bounds through run_exports
+    - zstd # bounds through run_exports
 
 test:
   requires:
