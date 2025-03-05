@@ -9,7 +9,7 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/llvmlite-{{ version }}.tar.gz
   sha256: 07667d66a5d150abed9157ab6c0b9393c9356f229784a4385c02f99e94fc94d4
 build:
-  number: 0
+  number: 1
   skip: true  # [py<310 or s390x]
   script_env:
     - PY_VCRUNTIME_REDIST
@@ -25,13 +25,16 @@ requirements:
     - pip
     - setuptools
     - wheel
+    # Statically linking to llvmdev ! see comments in build.sh
     - llvmdev 15.*
-    - llvm 15.*
     # zlib on win because our llvmdev is not built with LLVM_ENABLE_ZLIB=OFF
-    - zlib {{ zlib }} # [win]
+    # zlib and zstd on others because we are statically linking to llvmdev
+    - zlib {{ zlib }}
+    - zstd {{ zstd }}
   run:
     - python
-    - zlib # [win] through run_exports
+    - zlib # bounds through run_exports
+    - zstd # bounds through run_exports
 
 test:
   requires:
@@ -46,6 +49,8 @@ test:
     - export LLVMLITE_DIST_TEST=''  # [unix]
     - set LLVMLITE_DIST_TEST=""     # [win]
     - python -m llvmlite.tests
+  downstreams:
+    - numba
 
 about:
   home: https://llvmlite.readthedocs.io
