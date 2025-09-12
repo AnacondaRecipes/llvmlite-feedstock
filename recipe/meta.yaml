@@ -1,22 +1,26 @@
 {% set name = "llvmlite" %}
-{% set version = "0.44.0" %}
+{% set version = "0.45.0rc2" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/llvmlite-{{ version }}.tar.gz
-  sha256: 07667d66a5d150abed9157ab6c0b9393c9356f229784a4385c02f99e94fc94d4
+  git_url: https://github.com/numba/llvmlite.git
+  git_tag: v{{ version }}
+  #url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/llvmlite-{{ version }}.tar.gz
+  #sha256: 07667d66a5d150abed9157ab6c0b9393c9356f229784a4385c02f99e94fc94d4
+
 build:
-  number: 1
-  skip: true  # [py<310 or s390x]
+  number: 0
+  skip: true  # [py<310]
   script_env:
     - PY_VCRUNTIME_REDIST
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
     - cmake
     - make                   # [unix]
@@ -24,9 +28,8 @@ requirements:
     - python
     - pip
     - setuptools
-    - wheel
     # Statically linking to llvmdev ! see comments in build.sh
-    - llvmdev 15.*
+    - llvmdev 20.*
     # zlib on win because our llvmdev is not built with LLVM_ENABLE_ZLIB=OFF
     # zlib and zstd on others because we are statically linking to llvmdev
     - zlib {{ zlib }}
@@ -39,6 +42,7 @@ requirements:
 test:
   requires:
     - pip
+    - py-lief
   imports:
     - llvmlite
     - llvmlite.binding
@@ -46,8 +50,8 @@ test:
     - llvmlite.tests
   commands:
     - pip check
-    - export LLVMLITE_DIST_TEST=''  # [unix]
-    - set LLVMLITE_DIST_TEST=""     # [win]
+    - export LLVMLITE_DIST_TEST='1'  # [unix]
+    - set LLVMLITE_DIST_TEST="1"     # [win]
     - python -m llvmlite.tests
   downstreams:
     - numba
