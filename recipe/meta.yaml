@@ -6,8 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/numba/llvmlite.git
-  git_tag: v{{ version }}
+  url: https://github.com/numba/llvmlite/archive/refs/tags/v{{ version }}.zip
   #url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/llvmlite-{{ version }}.tar.gz
   #sha256: 07667d66a5d150abed9157ab6c0b9393c9356f229784a4385c02f99e94fc94d4
 
