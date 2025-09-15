@@ -4,7 +4,7 @@ cxx_compiler:            # [win]
   - vs2022               # [win]
 
 c_compiler_version:         # [osx]
-  - 20                      # [osx]
+  - 19                      # [osx]
 
 cxx_compiler_version:       # [osx]
-  - 20                      # [osx]
+  - 19                      # [osx]
