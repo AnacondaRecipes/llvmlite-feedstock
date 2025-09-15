@@ -1,21 +1,14 @@
-@rem Let CMake know about the LLVM install path, for find_package()
-set CMAKE_PREFIX_PATH=%LIBRARY_PREFIX%
-set "LLVM_CONFIG=%LIBRARY_PREFIX%\bin\llvm_config.exe"
-SET LIBPATH=%LIBRARY_LIB%
-set PREFIX=%LIBRARY_PREFIX%
-set "LDFLAGS=%LDFLAGS% /LIBPATH:%LIBRARY_LIB%"
-set LLVM_CONFIG=%LIBRARY_PREFIX%\bin\llvm_config.exe
-@REM set CMAKE_GENERATOR=Visual Studio 15 2017 Win64
-set ZLIB_NAME=zlib
-set ZLIB_LIBRARY_PATH=%LIBRARY_LIB%
-set ZLIB_INCLUDE=%LIBRARY_INC%
-set ZLIB_ROOT_DIR=%LIBRARY_PREFIX%
-set LLVM_ENABLE_ZLIB=ON
+setlocal enabledelayedexpansion
+
+@rem CMAKE_ARGS is set by visual studio's activation script. 
+@rem We need to extract the CMake variables and export them as environment variables
+@rem to have llvmlite's build script use them.
+for /f "tokens=1,2 delims==" %%a in ('echo %CMAKE_ARGS% ^| findstr /r "-D[^=]*="') do (
+    set "%%a=%%b"
+)
 
 @rem Ensure there are no build leftovers (CMake can complain)
 if exist ffi\build rmdir /S /Q ffi\build
-
-llvm-config.exe --libs
 
 %PYTHON% -m pip install . --no-deps  --no-build-isolation --ignore-installed -vv
 if errorlevel 1 exit 1
