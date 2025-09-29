@@ -1,14 +1,13 @@
 {% set name = "llvmlite" %}
-{% set version = "0.45.0rc2" %}
+{% set version = "0.45.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/numba/llvmlite/archive/refs/tags/v{{ version }}.zip
-  #url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/llvmlite-{{ version }}.tar.gz
-  #sha256: 07667d66a5d150abed9157ab6c0b9393c9356f229784a4385c02f99e94fc94d4
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/llvmlite-{{ version }}.tar.gz
+  sha256: ceb0bcd20da949178bd7ab78af8de73e9f3c483ac46b5bef39f06a4862aa8336
 
 build:
   number: 0
