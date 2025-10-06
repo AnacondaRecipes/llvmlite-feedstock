@@ -1,5 +1,5 @@
 {% set name = "llvmlite" %}
-{% set version = "0.45.0" %}
+{% set version = "0.45.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/llvmlite-{{ version }}.tar.gz
-  sha256: ceb0bcd20da949178bd7ab78af8de73e9f3c483ac46b5bef39f06a4862aa8336
+  sha256: 09430bb9d0bb58fc45a45a57c7eae912850bedc095cd0810a57de109c69e1c32
 
 build:
   number: 0
