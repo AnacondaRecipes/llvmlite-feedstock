@@ -24,8 +24,7 @@ index 779471e..5a64ac9 100755
      # driven toolchain.
      cmake_options = []
  
-+    if "CMAKE_ARGS" in os.environ:
-+        cmake_options += shlex.split(os.environ["CMAKE_ARGS"])
++    cmake_options += shlex.split(os.environ.get("CMAKE_ARGS", ""))
 +
      env_vars = {"LLVMLITE_PACKAGE_FORMAT": ("conda", "wheel"),
                  "LLVMLITE_USE_RTTI": ("ON", "OFF", ""),
@@ -42,14 +41,11 @@ index 779471e..5a64ac9 100755
 +        os.path.join(build_dir, 'llvmlite.dll'),          # Ninja
 +    ]
 +    
-+    dll_found = False
 +    for dll_path in dll_paths:
 +        if os.path.exists(dll_path):
 +            shutil.copy(dll_path, target_dir)
-+            dll_found = True
 +            break
-+    
-+    if not dll_found:
++    else:
 +        raise RuntimeError(f"Could not find llvmlite.dll in any expected location: {dll_paths}")
  
  
