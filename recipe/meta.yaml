@@ -1,5 +1,5 @@
 {% set name = "llvmlite" %}
-{% set version = "0.44.0" %}
+{% set version = "0.45.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,26 +7,30 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/llvmlite-{{ version }}.tar.gz
-  sha256: 07667d66a5d150abed9157ab6c0b9393c9356f229784a4385c02f99e94fc94d4
+  sha256: 09430bb9d0bb58fc45a45a57c7eae912850bedc095cd0810a57de109c69e1c32
+  patches:  # [win]
+    - patches/0001-use-conda-env.patch  # [win]
+
 build:
-  number: 1
-  skip: true  # [py<310 or s390x]
+  number: 0
+  skip: true  # [py<310]
   script_env:
     - PY_VCRUNTIME_REDIST
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
     - cmake
     - make                   # [unix]
+    - ninja-base             # [win]
   host:
     - python
     - pip
     - setuptools
-    - wheel
     # Statically linking to llvmdev ! see comments in build.sh
-    - llvmdev 15.*
+    - llvmdev 20.*
     # zlib on win because our llvmdev is not built with LLVM_ENABLE_ZLIB=OFF
     # zlib and zstd on others because we are statically linking to llvmdev
     - zlib {{ zlib }}
@@ -39,6 +43,7 @@ requirements:
 test:
   requires:
     - pip
+    - py-lief
   imports:
     - llvmlite
     - llvmlite.binding
@@ -46,8 +51,8 @@ test:
     - llvmlite.tests
   commands:
     - pip check
-    - export LLVMLITE_DIST_TEST=''  # [unix]
-    - set LLVMLITE_DIST_TEST=""     # [win]
+    - export LLVMLITE_DIST_TEST='1'  # [unix]
+    - set LLVMLITE_DIST_TEST="1"     # [win]
     - python -m llvmlite.tests
   downstreams:
     - numba
@@ -58,7 +63,8 @@ about:
   license_file: LICENSE
   license_family: BSD
   summary: A lightweight LLVM python binding for writing JIT compilers.
-  description: llvmlite provides a Python binding to LLVM for use in Numba. Numba previously relied on llvmpy.
+  description: |
+    llvmlite provides a Python binding to LLVM for use in Numba. Numba previously relied on llvmpy.
   doc_url: https://llvmlite.pydata.org
   dev_url: https://github.com/numba/llvmlite
 
