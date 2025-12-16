@@ -59,9 +59,11 @@ test:
 
 about:
   home: https://llvmlite.readthedocs.io
-  license: BSD-2-Clause
-  license_file: LICENSE
-  license_family: BSD
+  license: BSD-2-Clause AND Apache-2.0 WITH LLVM-exception
+  license_file:
+    - LICENSE
+    - LICENSE.thirdparty
+  license_family: BSD AND Apache
   summary: A lightweight LLVM python binding for writing JIT compilers.
   description: |
     llvmlite provides a Python binding to LLVM for use in Numba. Numba previously relied on llvmpy.
