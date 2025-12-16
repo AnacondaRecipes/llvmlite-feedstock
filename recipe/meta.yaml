@@ -1,5 +1,5 @@
 {% set name = "llvmlite" %}
-{% set version = "0.45.1" %}
+{% set version = "0.46.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/llvmlite-{{ version }}.tar.gz
-  sha256: 09430bb9d0bb58fc45a45a57c7eae912850bedc095cd0810a57de109c69e1c32
+  sha256: 227c9fd6d09dce2783c18b754b7cd9d9b3b3515210c46acc2d3c5badd9870ceb
   patches:  # [win]
     - patches/0001-use-conda-env.patch  # [win]
 
@@ -59,9 +59,10 @@ test:
 
 about:
   home: https://llvmlite.readthedocs.io
-  license: BSD-2-Clause
-  license_file: LICENSE
-  license_family: BSD
+  license: BSD-2-Clause AND Apache-2.0 WITH LLVM-exception
+  license_file:
+    - LICENSE
+    - LICENSE.thirdparty
   summary: A lightweight LLVM python binding for writing JIT compilers.
   description: |
     llvmlite provides a Python binding to LLVM for use in Numba. Numba previously relied on llvmpy.
