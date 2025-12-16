@@ -63,7 +63,6 @@ about:
   license_file:
     - LICENSE
     - LICENSE.thirdparty
-  license_family: BSD AND Apache
   summary: A lightweight LLVM python binding for writing JIT compilers.
   description: |
     llvmlite provides a Python binding to LLVM for use in Numba. Numba previously relied on llvmpy.
