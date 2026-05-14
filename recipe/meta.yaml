@@ -12,8 +12,11 @@ source:
     - patches/0001-use-conda-env.patch  # [win]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<310]
+  # We are statically linking to llvmdev
+  ignore_run_exports_from:
+    - llvmdev
   script_env:
     - PY_VCRUNTIME_REDIST
 
