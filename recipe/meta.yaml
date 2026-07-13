@@ -34,7 +34,7 @@ requirements:
     - wheel
     - setuptools
     # Statically linking to llvmdev ! see comments in build.sh
-    - llvmdev 20.*
+    - llvmdev 22.*
     # zlib on win because our llvmdev is not built with LLVM_ENABLE_ZLIB=OFF
     # zlib and zstd on others because we are statically linking to llvmdev
     - zlib {{ zlib }}
