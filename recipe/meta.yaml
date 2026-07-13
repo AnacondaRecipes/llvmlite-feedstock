@@ -1,29 +1,29 @@
 {% set name = "llvmlite" %}
-{% set version = "0.47.0" %}
+{% set version = "0.48.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/llvmlite-{{ version }}.tar.gz
-  sha256: 62031ce968ec74e95092184d4b0e857e444f8fdff0b8f9213707699570c33ccc
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 543b19f9ef8f3c7c60d1468191e4ee1b1537bf9f8a3d56f64c0ddd98de92edd2
   patches:  # [win]
     - patches/0001-use-conda-env.patch  # [win]
 
 build:
-  number: 1
-  skip: true  # [py<310]
+  number: 0
   # We are statically linking to llvmdev
   ignore_run_exports_from:
     - llvmdev
   script_env:
     - PY_VCRUNTIME_REDIST
+  skip: true  # [py<310]
 
 requirements:
   build:
-    - {{ compiler('c') }}
     - {{ stdlib('c') }}
+    - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
     - make                   # [unix]
@@ -31,6 +31,7 @@ requirements:
   host:
     - python
     - pip
+    - wheel
     - setuptools
     # Statically linking to llvmdev ! see comments in build.sh
     - llvmdev 20.*
@@ -73,12 +74,12 @@ about:
   dev_url: https://github.com/numba/llvmlite
 
 extra:
-  skip-lints:
-    # llvmlite is a LLVM python binding, which is why it uses llvm directly in host
-    - should_use_compilers
   recipe-maintainers:
     - jakirkham
     - souravsingh
     - marcelotrevisani
     - xhochy
     - mbargull
+  skip-lints:
+    # llvmlite is a LLVM python binding, which is why it uses llvm directly in host
+    - should_use_compilers
