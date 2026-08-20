@@ -18,7 +18,7 @@ build:
     - llvmdev
   script_env:
     - PY_VCRUNTIME_REDIST
-  skip: true  # [py<310]
+  skip: true  # [py<315 or py>=316]
 
 requirements:
   build:
