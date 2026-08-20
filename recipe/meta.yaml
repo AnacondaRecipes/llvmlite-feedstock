@@ -16,6 +16,12 @@ build:
   # We are statically linking to llvmdev
   ignore_run_exports_from:
     - llvmdev
+  ignore_run_exports:
+    # The static LLVM archive leaves no libc++ DSO dependency.
+    - libcxx  # [osx]
+    # Python already provides these Windows runtime dependencies.
+    - ucrt  # [win]
+    - vc14_runtime  # [win]
   script_env:
     - PY_VCRUNTIME_REDIST
   skip: true  # [py<315 or py>=316]
@@ -41,7 +47,7 @@ requirements:
     - zstd {{ zstd }}
   run:
     - python
-    - zlib # bounds through run_exports
+    # Host zlib's run export supplies libzlib, which owns the linked runtime library.
     - zstd # bounds through run_exports
 
 test:
