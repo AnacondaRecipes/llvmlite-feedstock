@@ -64,7 +64,7 @@ test:
 about:
   home: https://llvmlite.readthedocs.io
   license: BSD-2-Clause AND Apache-2.0 WITH LLVM-exception
-  license_family: BSD
+  license_family: Other
   license_file:
     - LICENSE
     - LICENSE.thirdparty
