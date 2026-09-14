@@ -1,5 +1,5 @@
 {% set name = "llvmlite" %}
-{% set version = "0.48.0" %}
+{% set version = "0.49.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 543b19f9ef8f3c7c60d1468191e4ee1b1537bf9f8a3d56f64c0ddd98de92edd2
+  sha256: 00f16db782f4a13c78c5804aedc434e46794a77e89999a168f9401106270e50a
   patches:  # [win]
     - patches/0001-use-conda-env.patch  # [win]
 
