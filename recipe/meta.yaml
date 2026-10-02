@@ -41,7 +41,7 @@ requirements:
     - zstd {{ zstd }}
   run:
     - python
-    - zlib # bounds through run_exports
+    - libzlib # analint: cbc_dep_in_run_missing_from_host  # libz.so.1 ships in libzlib; host keeps the zlib devel pkg for headers (bounds via run_exports)
     - zstd # bounds through run_exports
 
 test:
